@@ -12,9 +12,6 @@ from trac.util.text import pretty_size
 from trac.resource import ResourceNotFound
 from trac.attachment import Attachment
 
-revison = "$Rev$"
-url = "$URL$"
-
 class AllAttachmentsMacro(WikiMacroBase):
     """Shows all attachments on the Trac site.
 
