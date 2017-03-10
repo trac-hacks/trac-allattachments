@@ -1,6 +1,6 @@
 from setuptools import setup
 
-VERSION = '0.1'
+VERSION = '0.2'
 PACKAGE = 'allattachments'
 
 setup(
@@ -9,6 +9,7 @@ setup(
     description = "A Trac wiki macro that shows all attachments uploaded on a Trac site.",
     author = 'Daan van Etten',
     author_email = 'daan@stuq.nl',
+    url= 'https://trac-hacks.org/wiki/AllAttachmentsMacro',
     keywords = 'trac plugin',
     license = "CC-BY-NC-SA",
     packages = [PACKAGE],
@@ -17,6 +18,6 @@ setup(
     install_requires = [],
     zip_safe = False,
     entry_points = {
-        'trac.plugins': '%s = %s' % (PACKAGE, PACKAGE),
+        'trac.plugins': '%s = %s' % (PACKAGE, PACKAGE + '.api'),
     },
 )
