@@ -43,12 +43,12 @@ class AllAttachmentsMacro(WikiMacroBase):
             if attachment_type is None or attachment_type == "":
                 attachments = db("""
                    SELECT type,id,filename,size,time,
-                    description,author,ipnr FROM attachment
+                    description,author FROM attachment
                    """)
             else:
                 attachments = db("""
                    SELECT type,id,filename,size,time,
-                    description,author,ipnr FROM attachment
+                    description,author FROM attachment
                    WHERE type=%s
                    """, (attachment_type, ))
 
@@ -71,7 +71,7 @@ class AllAttachmentsMacro(WikiMacroBase):
                 " (", html.span(pretty_size(size), title=size), ") - added by ",
                 html.em(author), " to ",
                 html.a(types[type] + ' ' + id, href=formatters[type](id)), ' ')
-             for type, id, filename, size, time, description, author, ipnr
+             for type, id, filename, size, time, description, author
              in attachments
              if self._has_perm(type, id, filename, formatter.context)])
 
