@@ -19,16 +19,18 @@ from trac.wiki.macros import WikiMacroBase
 class AllAttachmentsMacro(WikiMacroBase):
     """Shows all attachments on the Trac site.
 
-       The first argument is the filter for which attachments to show.
-       The filter can have the value 'ticket' or 'wiki'. Omitting the filter
-       argument shows all attachments.
+       The first argument is the realm for which 
+       the attachments should be shown.
+       The realm can have the value 'wiki', 'ticket' or 'milestone'.
+       Omitting the realm argument shows all attachments.
 
        Examples:
 
        {{{
            [[AllAttachments()]]       # Show all attachments
-           [[AllAttachments(ticket)]] # Show attachments linked to tickets
            [[AllAttachments(wiki)]]   # Show attachments linked to wiki pages
+           [[AllAttachments(ticket)]] # Show attachments linked to tickets
+           [[AllAttachments(milestone)]]   # Show attachments linked to milestones
        }}}
     """
 
@@ -42,14 +44,14 @@ class AllAttachmentsMacro(WikiMacroBase):
         with self.env.db_transaction as db:
             if attachment_type is None or attachment_type == "":
                 attachments = db("""
-                   SELECT type,id,filename,size,time,
-                    description,author FROM attachment
+                   SELECT type, id, filename, size, time,
+                    description, author FROM attachment
                    """)
             else:
                 attachments = db("""
-                   SELECT type,id,filename,size,time,
-                    description,author FROM attachment
-                   WHERE type=%s
+                   SELECT type, id, filename, size, time,
+                    description, author FROM attachment
+                   WHERE type = %s
                    """, (attachment_type, ))
 
         formatters = {
